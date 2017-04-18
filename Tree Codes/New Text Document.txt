@@ -1,0 +1,39 @@
+typedef struct tree
+{
+int key;
+struct tree * left;
+struct tree * right;
+} Tree;
+
+Tree * createTreeFromPostorderInorder(int postorder[],
+int inorder[],int left,int right, int pos)
+{
+if(left > right)
+return NULL;
+
+Tree *t = (Tree*)malloc(sizeof(Tree));
+t->key = postorder[pos];
+int index = search(inorder,left, right, t->key);
+t->right = createTreeFromPostorderInorder(postorder,inorder,
+index +1, right, pos -1);
+t->left = createTreeFromPostorderInorder(postorder,inorder ,
+left,index-1, pos – 1 – (right – index));
+return t;
+}
+
+int search(int arr[],int left, int right,int key)
+{
+for(int i=left; i <= right; i++)
+{
+if( key == arr)
+{
+return i;
+}
+}
+return -1;
+}
+[/sourcecode]
+
+int postorder[] = {‘A’, ‘C’ , ‘E’, ‘D’, ‘B’, ‘H’, ‘I’, ‘G’, ‘F’};
+
+int inorder[] = {‘A’, ‘B’,’C’,’D’,’E’,’F’,’G’,’H’,’I’};

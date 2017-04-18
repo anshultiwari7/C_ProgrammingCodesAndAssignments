@@ -1,0 +1,57 @@
+void assign_binary( struct tree *t , int *arr , int top , FILE *f1 , FILE *f2 )
+{
+
+if( t==temp )
+return;
+
+
+
+if( t -> left != NULL )
+
+{
+
+arr[top] = 0 ;
+
+assign_binary( t->left , arr , top+1 , f1 , f2 ) ;
+
+}
+
+if( t -> right != NULL )
+
+{
+
+arr[top] = 1 ;
+
+assign_binary( t->right , arr ,top+1 , f1 , f2 ) ;
+
+}
+
+
+if( t->left == NULL && t->right == NULL )
+
+{
+
+printf( "\n%-5c\t%-5d\t" , t -> ch , t -> x ) ;
+
+fprintf(f1,"%d",t->ch);
+
+putc('\n',f1);
+
+for( i = 0 ; i < top ; i++ )
+
+{
+
+printf( "%d" , arr[i] ) ;
+
+fprintf(f2,"%d",arr[i]);
+//putw(arr[i],f2) ;
+
+}
+putc('\n',f2);
+
+top = 0 ;
+
+}
+
+}
+
